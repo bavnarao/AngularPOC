@@ -1,0 +1,22 @@
+import { NgModule }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppComponent }  from './app.component';
+
+import {LoginViewComponent} from "./login/login-view-component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+
+import {FormsModule} from "@angular/forms";
+
+import { routing }        from './app.routes';
+import { HttpModule }     from '@angular/http';
+import {MaterialService} from "./dashboard/material.service";
+import {SearchPipe} from "./dashboard/search.pipe";
+
+@NgModule({
+  imports:      [ BrowserModule, FormsModule, routing, HttpModule ],
+  declarations: [ AppComponent, LoginViewComponent, DashboardComponent, SearchPipe ],
+  providers: [MaterialService],
+  bootstrap:    [ DashboardComponent ]
+})
+export class AppModule { }
