@@ -1,3 +1,5 @@
+/// <reference path="../jquery.d.ts"/>
+
 import {Component} from "@angular/core";
 import {MaterialService} from "./material.service";
 import {Material} from "./material";
@@ -15,61 +17,102 @@ export class DashboardComponent {
     constructor(private service: MaterialService) {
         //this.materials = new Array<Material>();
     }
-    
+    ngOnInit() {
+        this.service.getMaterials().subscribe(
+            data => this.materials = data,
+            error => this.errorMessage = <any>error
+        );
+        $("#imagesList").show();
+        $("#jobsTable").show();
+        $("#recentDocTitle").show();
+    }
+
 
     getlist() {
-        $('#home').hide();
-        $('#menu2').show();
-         $('#menu4').hide();
-        $('#menu5').hide();
-        $('#menu2').addClass("tab-pane fade in active");
         this.service.getMaterials().subscribe(
             data => this.materials = data,
-            error =>  this.errorMessage = <any>error
+            error => this.errorMessage = <any>error
         );
+      
+       document.getElementById("contentTitle").innerHTML = "Job List";
+        $('#menu4').hide();
+        $('#menu5').hide();
+        $("#imagesList").hide();
+        $("#jobsTable").show();
+        $('a').removeClass('selected');
+        $("#joblst").addClass("framework-nav-item selected");
+        $("#recentDocTitle").hide();
 
 
     }
-    getimageData() {
-        alert("Image clicked");
+    getimageData(evt:any) {
+        evt=event.currentTarget;
+        let abc= evt.offsetParent.innerText;
+        alert(abc);
     }
-    getdashboard(){
-        $('#home').show();
+    getdashboard() {
+        /**$('#home').show();
         $('#menu2').show();
-        $('#menu2').addClass("tab-pane fade in active");
+        $('#menu2').addClass("tab-pane fade in active");*/
+        document.getElementById("contentTitle").innerHTML = "My Dashboard";
         this.service.getMaterials().subscribe(
             data => this.materials = data,
-            error =>  this.errorMessage = <any>error
+            error => this.errorMessage = <any>error
         );
-         $('#menu4').hide();
-        $('#menu5').hide();
-        $('#menu3').hide();
-        $('#doc').show();
+        $("#imagesList").show();
+        $("#jobsTable").show();
+        $("NAV > a").addClass("framework-nav-item");
+        $('a').removeClass('selected');
+        $("#dashboard").addClass("framework-nav-item selected");
+       $('#menu4').hide();
+       $('#menu5').hide();
+       $('#menu3').hide();
+       $("#recentDocTitle").show();
+       
     }
-    getdrive(){
-        $('#home').hide();
-        $('#menu3').show();
-        $('#menu2').hide();
+    getdrive() {
+        /** $('#home').hide();
+         $('#menu3').show();
+         $('#menu2').hide();
+         $('#menu4').hide();
+         $('#menu5').hide();*/
+         document.getElementById("contentTitle").innerHTML = "Seismic Drive";
+         $("#imagesList").hide();
+        $("#jobsTable").hide();
+         $('#menu4').hide();
+         $('#menu5').hide();
+         $('#menu3').show();
+         $('#menu3').addClass("tab-pane fade in active");
+        $('a').removeClass('selected');
+        $("#seismicDrive").addClass("framework-nav-item selected");
+        $("#recentDocTitle").hide();
+    }
+    getflow() {
+        document.getElementById("contentTitle").innerHTML = "Flow Designer";
+        $('a').removeClass('selected');
+        $("#flowDesign").addClass("framework-nav-item selected");
+        $("#imagesList").show();
+        $("#jobsTable").hide();
         $('#menu4').hide();
-        $('#menu5').hide();
-        $('#menu3').addClass("tab-pane fade in active");
-}
-    getflow(){
-        $('#home').show();
-        $('#doc').hide();
-        $('#menu4').hide();
-        $('#menu2').hide();
-        $('#menu3').hide();
-        $('#menu5').hide();
-         $('#menu4').addClass("tab-pane fade in active");
-}
-    getview(){
-         $('#home').hide();
+         $('#menu3').hide();
+         $('#menu5').hide();
+         $("#recentDocTitle").show();
+         $("#recentDocTitle").val("My Documents");
+       
+    }
+    getview() {
+        
+        $('a').removeClass('selected');
+        $("#viewer").addClass("framework-nav-item selected");
+        $("#imagesList").hide();
         $('#menu5').show();
-        $('#menu2').hide();
+       $("#jobsTable").hide();
         $('#menu3').hide();
         $('#menu4').hide();
          $('#menu5').addClass("tab-pane fade in active");
-   }
-    
+         document.getElementById("contentTitle").innerHTML = "Viewer";
+         $("#recentDocTitle").hide();
+         
+    }
+
 }
