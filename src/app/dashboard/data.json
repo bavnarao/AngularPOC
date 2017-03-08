@@ -2,7 +2,7 @@
 {
 "mid":"1",
 "mname":"Test flow-1",
-"toq":20,
+"toq":0,
 "taq":40,
 "tsq":"20-12-2016",
 "uom":"user1",
@@ -39,7 +39,7 @@
 },{
 "mid":"5",
 "mname":"Test flow-5",
-"toq":30,
+"toq":0,
 "taq":100,
 "tsq":"20-12-2016",
 "uom":"user5",
@@ -57,7 +57,7 @@
 },{
 "mid":"7",
 "mname":"Test flow-1",
-"toq":120,
+"toq":70,
 "taq":100,
 "tsq":"20-12-2016",
 "uom":"user7",

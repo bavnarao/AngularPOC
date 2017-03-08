@@ -3,6 +3,7 @@
 import {Component} from "@angular/core";
 import {MaterialService} from "./material.service";
 import {Material} from "./material";
+//import {AgGridNg2} from 'ag-grid-ng2/main';
 
 @Component({
     selector: "my-app",
@@ -14,27 +15,57 @@ export class DashboardComponent {
     materials: Material[];
     errorMessage: string;
     searchText: string = "";
+    orderby : string="";
     constructor(private service: MaterialService) {
         //this.materials = new Array<Material>();
     }
+    sorting: any = {
+    column: 'Name', //to match the variable of one of the columns
+    descending: false
+  };
     ngOnInit() {
         this.service.getMaterials().subscribe(
             data => this.materials = data,
             error => this.errorMessage = <any>error
         );
+        
         $("#imagesList").show();
         $("#jobsTable").show();
         $("#recentDocTitle").show();
     }
+    showFilter() {
+        $('#myInput').show();
+    }
 
+   promise(data: Material[]) {
+    
+    for (var index = 0; index < data.length; index++) {
+        let widthV:any = data[index].toq;
+       
+       $('.bar')[index].style.width = widthV+"%";
+      if(data[index].status == "Error") {
+          $('.slb-progress-indicator')[index].className = "slb-progress-indicator warning";
+           $('.bar')[index].style.width = "100%";
+      } else {
+          $('.slb-progress-indicator')[index].className = "slb-progress-indicator positive"
+      }
+       
+        
+    }
+    
+}
+
+    onKill() {
+       
+    }
 
     getlist() {
         this.service.getMaterials().subscribe(
-            data => this.materials = data,
+            data => this.promise(data),
             error => this.errorMessage = <any>error
         );
-      
-       document.getElementById("contentTitle").innerHTML = "Job List";
+
+        document.getElementById("contentTitle").innerHTML = "Job List";
         $('#menu4').hide();
         $('#menu5').hide();
         $("#imagesList").hide();
@@ -45,15 +76,12 @@ export class DashboardComponent {
 
 
     }
-    getimageData(evt:any) {
-        evt=event.currentTarget;
-        let abc= evt.offsetParent.innerText;
+    getimageData(evt: any) {
+        evt = event.currentTarget;
+        let abc = evt.offsetParent.innerText;
         alert(abc);
     }
     getdashboard() {
-        /**$('#home').show();
-        $('#menu2').show();
-        $('#menu2').addClass("tab-pane fade in active");*/
         document.getElementById("contentTitle").innerHTML = "My Dashboard";
         this.service.getMaterials().subscribe(
             data => this.materials = data,
@@ -64,25 +92,20 @@ export class DashboardComponent {
         $("NAV > a").addClass("framework-nav-item");
         $('a').removeClass('selected');
         $("#dashboard").addClass("framework-nav-item selected");
-       $('#menu4').hide();
-       $('#menu5').hide();
-       $('#menu3').hide();
-       $("#recentDocTitle").show();
-       
+        $('#menu4').hide();
+        $('#menu5').hide();
+        $('#menu3').hide();
+        $("#recentDocTitle").show();
+
     }
     getdrive() {
-        /** $('#home').hide();
-         $('#menu3').show();
-         $('#menu2').hide();
-         $('#menu4').hide();
-         $('#menu5').hide();*/
-         document.getElementById("contentTitle").innerHTML = "Seismic Drive";
-         $("#imagesList").hide();
+        document.getElementById("contentTitle").innerHTML = "Seismic Drive";
+        $("#imagesList").hide();
         $("#jobsTable").hide();
-         $('#menu4').hide();
-         $('#menu5').hide();
-         $('#menu3').show();
-         $('#menu3').addClass("tab-pane fade in active");
+        $('#menu4').hide();
+        $('#menu5').hide();
+        $('#menu3').show();
+        $('#menu3').addClass("tab-pane fade in active");
         $('a').removeClass('selected');
         $("#seismicDrive").addClass("framework-nav-item selected");
         $("#recentDocTitle").hide();
@@ -94,25 +117,23 @@ export class DashboardComponent {
         $("#imagesList").show();
         $("#jobsTable").hide();
         $('#menu4').hide();
-         $('#menu3').hide();
-         $('#menu5').hide();
-         $("#recentDocTitle").show();
-         $("#recentDocTitle").val("My Documents");
-       
+        $('#menu3').hide();
+        $('#menu5').hide();
+        $("#recentDocTitle").show();
     }
     getview() {
-        
+
         $('a').removeClass('selected');
         $("#viewer").addClass("framework-nav-item selected");
         $("#imagesList").hide();
         $('#menu5').show();
-       $("#jobsTable").hide();
+        $("#jobsTable").hide();
         $('#menu3').hide();
         $('#menu4').hide();
-         $('#menu5').addClass("tab-pane fade in active");
-         document.getElementById("contentTitle").innerHTML = "Viewer";
-         $("#recentDocTitle").hide();
-         
+        $('#menu5').addClass("tab-pane fade in active");
+        document.getElementById("contentTitle").innerHTML = "Viewer";
+        $("#recentDocTitle").hide();
+
     }
 
 }

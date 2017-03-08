@@ -1,5 +1,7 @@
 
-<DIV class="navigation-framework"><NAV class="framework-sub-nav"><BUTTON class="slb-button icon-only">
+<DIV class="navigation-framework">
+
+<NAV class="framework-sub-nav"><BUTTON class="slb-button icon-only">
 <DIV class="slb-icon"><svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" 
 xlink:href="#icon-launch-screen" />             </svg>           </DIV><SPAN 
 class="text">Launch Screen</SPAN>           </BUTTON>           
@@ -63,14 +65,14 @@ href="#page1" (click)="getview();"  id="viewer">
 
 <DIV class="slb-dashboard" style="overflow: auto;">
 
-<DIV class="view-container">
-    <div  style="margin-left: 40px; display : none;" id="recentDocTitle"> <H3>My Recent Documents</H3></div>
+<DIV class="view-container" >
+    <div style="margin-left:37px;" id="recentDocTitle" class="view"> <H3>My Recent Documents</H3></div>
 <DIV class="view" id="imagesList" >
    
 <DIV class="slb-card">
 <DIV class="card-container">
 <DIV class="slb-card-content">
-<DIV class="slb-progress-indicator "><img src="images/workflow.jpg" style="width:200px" (click)= "getimageData();">               
+<DIV><img src="images/workflow.jpg" style="width:200px" (click)= "getimageData();">               
 
 <DIV class="meta"><SPAN class="type">Seismic Flow Test 1</SPAN>           
                 </DIV></DIV></DIV></DIV></DIV>
@@ -78,7 +80,7 @@ href="#page1" (click)="getview();"  id="viewer">
 <DIV class="card-container">
 
 <DIV class="slb-card-content">
-<DIV class="slb-progress-indicator "><img src="images/workflow.jpg" (click)= "getimageData();" style="width:200px">      
+<DIV><img src="images/workflow.jpg" (click)= "getimageData();" style="width:200px">      
 
 <DIV class="meta"><SPAN class="type">Seismic Flow Test 2</SPAN>         
                 </DIV></DIV></DIV></DIV></DIV>
@@ -86,7 +88,7 @@ href="#page1" (click)="getview();"  id="viewer">
 <DIV class="card-container">
 
 <DIV class="slb-card-content">
-<DIV class="slb-progress-indicator "><img src="images/workflow.jpg" (click)= "getimageData();" style="width:200px">    
+<DIV><img src="images/workflow.jpg" (click)= "getimageData();" style="width:200px">    
           
 <DIV class="meta"><SPAN class="type">Seismic Flow Test 3</SPAN>       
               </DIV></DIV></DIV></DIV></DIV>
@@ -94,7 +96,7 @@ href="#page1" (click)="getview();"  id="viewer">
 <DIV class="card-container">
 
 <DIV class="slb-card-content">
-<DIV class="slb-progress-indicator "><img src="images/workflow.jpg"  (click)= "getimageData();" style="width:200px">     
+<DIV><img src="images/workflow.jpg"  (click)= "getimageData();" style="width:200px">     
 
 <DIV class="meta"><SPAN class="type">Seismic Flow Test 4</SPAN>                   
                 </DIV></DIV></DIV></DIV></DIV>
@@ -106,7 +108,7 @@ href="#page1" (click)="getview();"  id="viewer">
 <DIV class="slb-icon"><svg xmlns="http://www.w3.org/2000/svg"><use xmlns:xlink="http://www.w3.org/1999/xlink" 
 xlink:href="#icon-add-2x" />                   </svg>                 
 </DIV><SPAN>Add New</SPAN>               </A>             </DIV> -->
-<DIV class="info" id="jobsTable">
+<DIV class="view" id="jobsTable" style="margin-left : 37px; margin-right: 54px;">
 <DIV class="slb-table">
 <DIV class="slb-table-heading">
 <H2>My Job List</H2><BUTTON class="slb-button icon-only">
@@ -118,12 +120,13 @@ xlink:href="#icon-add" />                    </svg>
     <br/><br/>
     <div class="slb-table-container">
             <!-- <h3>My Job List</h3> -->
-        <table class="table table-striped table-bordered table-responsive table-condensed table-hover" id="exmaple">
+            
+        <table class="table table-striped table-responsive table-condensed table-hover table-sortable" id="example" sortable>
             <thead>
                 <tr>
-<th >Job ID<span class="caret"></span></th>
+<th style="background-color:#F4F5F9;color:#555452;font-size:15px;">Job ID<span class="caret"></span></th>
 <th style="background-color:#F4F5F9;color:#555452;font-size:15px;">Flow ID<span class="caret"></span></th>
-<th style="background-color:#F4F5F9;color:#555452;font-size:15px;">Flow Name<span class="caret"></span></th>
+<th style="background-color:#F4F5F9;color:#555452;font-size:15px;">Flow Name <span onClick = "document.getElementById('myInput').style.display = 'block'" class="caret"></span><input hidden id="myInput" type="text" [(ngModel)]="searchText"/></th>
 <th style="background-color:#F4F5F9;color:#555452;font-size:15px;">Progress<span class="caret"></span></th>
 <th style="background-color:#F4F5F9;color:#555452;font-size:15px;">Status<span class="caret"></span></th>
 <th style="background-color:#F4F5F9;color:#555452;font-size:15px;">Date Submitted<span class="caret"></span></th>
@@ -137,12 +140,19 @@ xlink:href="#icon-add" />                    </svg>
                     <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.mid}}</td>
                     <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.toq}}</td>
                     <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.mname}}</td>
-                    <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.toq}}</td>
+                    <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item"><DIV class="slb-progress-indicator positive"><SPAN 
+      class="value">{{item.toq}}%</SPAN>                 
+      <DIV class="wrap">
+      <DIV class="bar" style="width: 50%;"></DIV></DIV>
+      <DIV class="meta"></DIV></DIV></td>
                     <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.status}}</td>
                     <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.tsq}}</td>
                     <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.uom}}</td>
                     <td style="background-color:#Ffffff;color:#555452;font-size:12px;" class="item">{{item.tsq}}</td>
-                    <td style="background-color:#Ffffff;color:#555452;font-size:15px;"><img src="images/comment.png" onclick="document.getElementById('cmt').src='/images/comment1.png'" id="cmt">&nbsp;&nbsp;</td>
+                    <td style="background-color:#Ffffff;color:#555452;font-size:15px;">
+                    <a class="ng2-smart-action ng2-smart-action-edit-edit" href="#">Edit</a>&nbsp;&nbsp;
+                    <button (click)="onKill();">Kill</button></td>
+                    <!-- <img src="images/comment.png" onclick="document.getElementById('cmt').src='/images/comment1.png'" id="cmt">&nbsp;&nbsp;</td> -->
                     </tr>
     
                 </tbody>
